@@ -1,0 +1,11 @@
+.Controls {
+    width: 100%;
+    background-color: rgb(235, 163, 135);
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    box-shadow: 0 2px 1px #ccc;
+    margin: auto;
+    padding: 10px 0;
+}
+

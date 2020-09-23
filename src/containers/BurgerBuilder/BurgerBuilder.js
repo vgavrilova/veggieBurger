@@ -1,0 +1,95 @@
+import React, {Component} from 'react';
+
+import Aux from '../../hoc/Aux';
+import Burger from '../../components/Burger/Burger';
+import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+
+
+const INGREDIENT_PRICES = {
+    salad: 0.5,
+    cheese: 0.8,
+    vegBacon: 1.3,
+    vegMeat: 2
+}
+
+class BurgerBuilder extends Component {
+    state = {
+        ingredients: {
+            
+            salad: 0,
+            vegBacon: 0,
+            cheese: 0,
+            vegMeat: 0
+            
+        },
+        total: 5
+    }
+
+    addIngredientHandler = (type) => {
+        // increment an ingredient of selected type
+        const updatedCount = this.state.ingredients[type] + 1;
+        const updatedIngredients = {
+            ...this.state.ingredients
+        };
+
+        // save the updated count to the oblect ingredients
+        updatedIngredients[type] = updatedCount;
+
+        const priceAddition = INGREDIENT_PRICES[type];
+        // sum total price with the price of an added element
+        const newPrice = this.state.total + priceAddition;
+        // update the state
+        this.setState({total: newPrice, ingredients: updatedIngredients});
+
+    }
+
+    removeIngredientHandler = (type) => {
+        const oldCount = this.state.ingredients[type];
+        // prevent removing when havin null items
+        if(oldCount <= 0){
+            return;
+        }
+        const updatedCount = oldCount - 1;
+        const updatedIngredients = {
+            ...this.state.ingredients
+        };
+
+        updatedIngredients[type] = updatedCount;
+
+        const priceDiscount = INGREDIENT_PRICES[type];
+        const newPrice = this.state.total - priceDiscount;
+        this.setState({total: newPrice, ingredients: updatedIngredients});
+    }
+
+    
+    render(){
+        const disableInfo = {
+            ...this.state.ingredients
+        };
+        // create a new array of booleans with the ingredients
+        // that checks whether an ingredient is less than 0
+        for(let key in disableInfo){
+            disableInfo[key] = disableInfo[key] <= 0; // => returns true or false
+        }
+        // {salad:  true, cheese: false ...}
+
+
+        return(
+
+            <Aux>
+                <Burger ingredients={this.state.ingredients}/>
+                <div>
+                    <BuildControls 
+                    addIngredient={this.addIngredientHandler}
+                    removeIngredient={this.removeIngredientHandler}
+                    disabled={disableInfo}/>
+                </div>
+                
+            </Aux>
+        );
+    }
+
+}
+
+
+export default BurgerBuilder;
