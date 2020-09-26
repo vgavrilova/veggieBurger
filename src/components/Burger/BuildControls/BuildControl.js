@@ -9,12 +9,12 @@ const buildControl = (props) => (
         <button 
             className={style.More} 
             onClick={props.addIngredient}
-            ><i class="fas fa-plus"></i>
+            ><i className="fas fa-plus"></i>
         </button>
         <button 
             className={style.Less} 
             onClick={props.removeIngredient}
-            disabled={props.disabled}><i class="fas fa-minus"></i>
+            disabled={props.disabled}><i className="fas fa-minus"></i>
         </button>
     </div>
 

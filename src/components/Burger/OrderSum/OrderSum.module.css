@@ -1,0 +1,19 @@
+.Sum {
+    text-align: center;
+
+}
+.Sum ul {
+
+    background: white;
+    list-style-type: none;
+
+}
+.Sum ul li {
+
+    width: 50%;
+    transform: translate(20%);
+    text-align: left;
+    display: block;
+    margin: auto;
+    padding: 5px;
+ }
