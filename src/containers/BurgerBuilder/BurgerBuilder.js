@@ -25,7 +25,8 @@ class BurgerBuilder extends Component {
             
         },
         total: 5,
-        purchaseable: false
+        purchaseable: false,
+        orderMode: false
     }
 
     updatePurchase = (prevState) => {
@@ -86,6 +87,18 @@ class BurgerBuilder extends Component {
         this.updatePurchase(updatedIngredients);
     }
 
+    purchaseHandler = () => {
+        this.setState({orderMode: true});
+    }
+
+    stopPurchaseHandler = () => {
+        this.setState({orderMode: false});
+    }
+
+    continuePurchaseHandler = () => {
+        alert('Continue!');
+    }
+
     
     render(){
 
@@ -99,21 +112,27 @@ class BurgerBuilder extends Component {
         }
         // {salad:  true, cheese: false ...}
 
+
         return(
 
             <Aux>
-                <Modal>
-                    <OrderSum ingredients={this.state.ingredients}/>
+                <Modal show={this.state.orderMode} clickedBackdrop={this.stopPurchaseHandler}>
+                    <OrderSum 
+                        continue={this.continuePurchaseHandler}
+                        cancel={this.stopPurchaseHandler}
+                        price={this.state.total}
+                        ingredients={this.state.ingredients}/>
                 </Modal>
                 <Burger ingredients={this.state.ingredients}/>
                 
                 <div>
                     <BuildControls 
-                    addIngredient={this.addIngredientHandler}
-                    removeIngredient={this.removeIngredientHandler}
-                    disabled={disableInfo}
-                    price={this.state.total}
-                    purchaseable={this.state.purchaseable}/>
+                        addIngredient={this.addIngredientHandler}
+                        removeIngredient={this.removeIngredientHandler}
+                        disabled={disableInfo}
+                        price={this.state.total}
+                        purchaseable={this.state.purchaseable}
+                        btnClicked={this.purchaseHandler}/>
                 </div>
                 
             </Aux>

@@ -24,13 +24,13 @@
     font-family: inherit;
     font-size: 1.2em;
     padding: 15px 30px;
-    box-shadow: 2px 2px 2px #963d09;
-    margin: 20px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.281);
+    margin: 30px;
 }
 
 .checkoutBtn:hover, .checkoutBtn:active {
     background-color: #db7241;
-    border: 1px solid #966909;
+    border: 1px solid #964809;
     color: #fafafa;
 }
 
