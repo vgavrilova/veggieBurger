@@ -1,6 +1,7 @@
 import React from 'react';
 import style from './OrderSum.module.css';
 import Button from '../../UI/Button/Button';
+import CloseBtn from '../../UI/Button/CloseBtn';
 
 const orderSum = (props) => {
     const ingredientSummary = Object.keys(props.ingredients)
@@ -15,6 +16,7 @@ const orderSum = (props) => {
     return (
 
         <div className={style.Sum}>
+            <CloseBtn className={style.CloseBtn} clicked={props.cancel}/>
             <h3>Your Order</h3>
             <p>An amazing veggie burger with the following ingredients:</p>
             <ul>

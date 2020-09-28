@@ -1,0 +1,9 @@
+.Menu {
+    font-size: 37px;
+}
+
+@media (min-width: 500px){
+    .Menu {
+        display: none;
+    }
+}
