@@ -113,3 +113,13 @@
     background: linear-gradient(#bf3813, #c45e38);
     margin: 2% auto;
 }
+.Tomato {
+
+    border-radius: 19px;
+    background-color: #F13233;
+    height: 5%;
+    width: 75%;
+    margin: 2% auto;
+    border-bottom: 5px solid #940C0E;
+ 
+}

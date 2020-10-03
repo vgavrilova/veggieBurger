@@ -31,7 +31,7 @@ const burger = (props) => {
         ingredients = <p>Please start adding ingredients!</p>
     }
 
-    console.log(ingredients);  
+    //console.log(ingredients);  
     return (
         <div className={style.Burger}>
             <BurgerIngredient type="bread-top"/>
