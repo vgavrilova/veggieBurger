@@ -6,16 +6,22 @@ import style from './Input.module.css';
 const input = (props) => {
 
     let inputType = null;
+    const inputClasses = [style.InputEl];
+
+    if(props.invalid && props.shouldValidate && props.touched){
+        inputClasses.push(style.Invalid);
+    }
+
     switch (props.inputType){
         case 'input':
             inputType = <input 
-                            className={style.InputEl} {...props.inputConfig} 
+                            className={inputClasses.join(' ')} {...props.inputConfig} 
                             value={props.value} 
                             onChange={props.changed}/>;
             break;
         case 'textarea':
             inputType = <textarea 
-                            className={style.InputEl} {...props.inputConfig} 
+                            className={inputClasses.join(' ')} {...props.inputConfig} 
                             value={props.value} 
                             onChange={props.changed}/>;
             break;
@@ -23,7 +29,7 @@ const input = (props) => {
             inputType = (
                 <select
                 onChange={props.changed} 
-                className={style.InputEl}
+                className={inputClasses.join(' ')}
                 value={props.value}>
                     {
                         props.inputConfig.options.map(option => (
@@ -38,7 +44,7 @@ const input = (props) => {
                 break;
         default: 
             inputType = <textarea 
-                            className={style.InputEl} {...props.inputConfig} 
+                            className={inputClasses.join(' ')} {...props.inputConfig} 
                             value={props.value} 
                             onChange={props.changed}/>;
             break;
