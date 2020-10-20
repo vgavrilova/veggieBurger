@@ -5,7 +5,8 @@ import style from './Button.module.css';
 const button = (props) => (
     <button
         className={[style.Button, style[props.btnType]].join(' ')}
-        onClick={props.clicked}>{props.children}</button>
+        onClick={props.clicked}
+        disabled={props.disabled}>{props.children}</button>
 );
 
 

@@ -111,9 +111,12 @@ class ContactData extends Component {
                             {value: 'standard', displayValue: 'Standard Delivery'}
                         ]
                     },
-                    value: ''
+                    value: 'fastest',
+                    validation: {},
+                    valid: true
                 }
         },
+        formIsValid: false,
         isLoading: false
             
     }
@@ -174,10 +177,21 @@ class ContactData extends Component {
         formIds.value = e.target.value;
         formIds.touched = true;
         formIds.valid = this.checkValidity(formIds.value, formIds.validation);
+
         form[identifier] = formIds;
+
+
+        let formIsValid = true;
+        // set formIsValid to true
+        // only if the previous AND the current element is true
+        for(let identifier in form){
+            formIsValid = form[identifier].valid && formIsValid;
+        }
+        
         //console.log(formIds.valid);
         this.setState({
-            orderForm: form
+            orderForm: form,
+            formIsValid: formIsValid
         });
     }
 
@@ -200,13 +214,14 @@ class ContactData extends Component {
                     invalid={!field.config.valid }
                     touched={field.config.touched}
                     shouldValidate={field.config.validation}
+                    valueType={field.id}
                      />
         })
 
         let form = (
             <form onSubmit={this.orderHandler}>
                     {inputFields}
-                    <Button btnType="Success">Order now</Button>
+                    <Button btnType="Success" disabled={!this.state.formIsValid}>Order now</Button>
             </form>
         );
         if(this.state.isLoading) {

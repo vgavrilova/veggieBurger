@@ -35,3 +35,8 @@
 .Invalid:focus {
     background-color: rgb(251, 187, 187);
 }
+
+.ValidationError {
+    color: red;
+    margin: 5px 0;
+} 

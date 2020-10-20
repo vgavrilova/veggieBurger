@@ -7,9 +7,11 @@ const input = (props) => {
 
     let inputType = null;
     const inputClasses = [style.InputEl];
+    let errorMessage = null; 
 
     if(props.invalid && props.shouldValidate && props.touched){
         inputClasses.push(style.Invalid);
+        errorMessage = <p className={style.ValidationError}>Please enter a valid {props.valueType}!</p>
     }
 
     switch (props.inputType){
@@ -54,6 +56,7 @@ const input = (props) => {
         <div className={style.Input}>
             <label className={style.Label}>{props.label}</label>
             {inputType}
+            {errorMessage}
         </div>
     );
 }
