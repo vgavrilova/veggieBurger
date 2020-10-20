@@ -146,7 +146,8 @@ class BurgerBuilder extends Component {
                      : <Spinner />;
 
         if(this.state.ingredients){
-            burger = (<Aux>
+            burger = (
+            <Aux>
                 <Burger ingredients={this.state.ingredients}/>
                 <BuildControls 
                     addIngredient={this.addIngredientHandler}
@@ -155,7 +156,8 @@ class BurgerBuilder extends Component {
                     price={this.state.total}
                     purchaseable={this.state.purchaseable}
                     btnClicked={this.purchaseHandler}/>
-            </Aux>);
+            </Aux>
+            );
 
             orderSum = <OrderSum 
                         continue={this.continuePurchaseHandler}
