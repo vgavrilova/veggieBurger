@@ -12,18 +12,9 @@ import withErrorHandler from '../../hoc/withErrorHandler';
 import * as actionTypes from '../../store/actions';
 
 
-const INGREDIENT_PRICES = {
-    tomato: 0.45,
-    salad: 0.5,
-    cheese: 0.8,
-    vegBacon: 1.3,
-    vegMeat: 2
-}
 
 class BurgerBuilder extends Component {
     state = {
-        total: 5,
-        purchaseable: false,
         orderMode: false,
         isLoading: false,
         error: false
@@ -41,10 +32,7 @@ class BurgerBuilder extends Component {
         //     });
     }
 
-    updatePurchase = (prevState) => {
-        const ingredients = {
-            ...prevState
-        };
+    updatePurchase = (ingredients) => {
 
         // customize an array of keys as an array of the values
         // summarize the values with reduce() method
@@ -56,48 +44,10 @@ class BurgerBuilder extends Component {
 
             //console.log(sum); 
 
-           this.setState({purchaseable: sum > 0});
+           return sum > 0;
             
     }
        
-
-    addIngredientHandler = (type) => {
-        // increment an ingredient of selected type
-        const updatedCount = this.state.ingredients[type] + 1;
-        const updatedIngredients = {
-            ...this.state.ingredients
-        };
-
-        // save the updated count to the oblect ingredients
-        updatedIngredients[type] = updatedCount;
-
-        const priceAddition = INGREDIENT_PRICES[type];
-        // sum total price with the price of an added element
-        const newPrice = this.state.total + priceAddition;
-        // update the state
-        this.setState({total: newPrice, ingredients: updatedIngredients});
-        this.updatePurchase(updatedIngredients);
-
-    }
-
-    removeIngredientHandler = (type) => {
-        const oldCount = this.state.ingredients[type];
-        // prevent removing when havin null items
-        if(oldCount <= 0){
-            return;
-        }
-        const updatedCount = oldCount - 1;
-        const updatedIngredients = {
-            ...this.state.ingredients
-        };
-
-        updatedIngredients[type] = updatedCount;
-
-        const priceDiscount = INGREDIENT_PRICES[type];
-        const newPrice = this.state.total - priceDiscount;
-        this.setState({total: newPrice, ingredients: updatedIngredients});
-        this.updatePurchase(updatedIngredients);
-    }
 
     purchaseHandler = () => {
         this.setState({orderMode: true});
@@ -110,10 +60,10 @@ class BurgerBuilder extends Component {
     continuePurchaseHandler = () => {
 
         const queryParams = [];
-        for(let i in this.state.ingredients){
-            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
+        for(let i in this.props.ingredients){
+            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.props.ingredients[i]));
         }
-        queryParams.push('total=' + encodeURIComponent(this.state.total));
+        queryParams.push('total=' + encodeURIComponent(this.props.total));
         const queryString = queryParams.join('&');
 
         this.props.history.push(`/checkout?${queryString}`);
@@ -128,7 +78,7 @@ class BurgerBuilder extends Component {
             ...this.props.ingredients
         };
         // create a new array of booleans with the ingredients
-        // that checks whether an ingredient is less than 0
+        // that checks whether an ingredient is less or equal to 0
         for(let key in disableInfo){
             disableInfo[key] = disableInfo[key] <= 0; // => returns true or false
         }
@@ -153,8 +103,8 @@ class BurgerBuilder extends Component {
                     addIngredient={this.props.onAddIngredientHandler}
                     removeIngredient={this.props.onRemoveIngredientHandler}
                     disabled={disableInfo}
-                    price={this.state.total}
-                    purchaseable={this.state.purchaseable}
+                    price={this.props.total}
+                    purchaseable={this.updatePurchase(this.props.ingredients)}
                     btnClicked={this.purchaseHandler}/>
             </Aux>
             );
@@ -162,7 +112,7 @@ class BurgerBuilder extends Component {
             orderSum = <OrderSum 
                         continue={this.continuePurchaseHandler}
                         cancel={this.stopPurchaseHandler}
-                        price={this.state.total}
+                        price={this.props.total}
                         ingredients={this.props.ingredients}/>;
         }
 
