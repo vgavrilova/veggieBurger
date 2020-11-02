@@ -56,7 +56,7 @@ class BurgerBuilder extends Component {
     stopPurchaseHandler = () => {
         this.setState({orderMode: false});
     }
-
+/* 
     continuePurchaseHandler = () => {
 
         const queryParams = [];
@@ -69,6 +69,10 @@ class BurgerBuilder extends Component {
         this.props.history.push(`/checkout?${queryString}`);
 
         
+    } */
+
+    continuePurchaseHandler = () => {
+        this.props.history.push('/checkout');
     }
 
     

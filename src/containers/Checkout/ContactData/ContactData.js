@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Button from '../../../components/UI/Button/Button';
 import style from './ContactData.module.css';
@@ -242,4 +243,11 @@ class ContactData extends Component {
 
 }
 
-export default ContactData;
+const mapStateToProps = (state) => {
+    return {
+        ingredients: state.ingredients,
+        total: state.total
+    };
+}
+
+export default connect(mapStateToProps)(ContactData);
