@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CheckoutSum from '../../components/Order/CheckoutSum/CheckoutSum';
 import { connect } from 'react-redux';
 
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import ContactData from '../Checkout/ContactData/ContactData';
 
 class Checkout extends Component {
@@ -35,28 +35,33 @@ class Checkout extends Component {
     }
 
     checkoutContinued = () => {
+
         this.props.history.replace('/checkout/contact-data');
     }
 
     render(){
-
-        return(
-            <div>
-                <CheckoutSum 
+        let summary = <Redirect to="/"/>;
+        if (this.props.ingredients){
+            summary = (
+                <div>
+                    <CheckoutSum 
                     ingredients={this.props.ingredients} 
                     checkoutCancelled={this.checkoutCancelled}
                     checkoutContinued={this.checkoutContinued} />
-                <Route 
-                    path={this.props.match.path + '/contact-data'} 
-                    component={ContactData} />
-            </div>
-        );
+                    <Route 
+                        path={this.props.match.path + '/contact-data'} 
+                        component={ContactData} />
+                </div>
+            );
+        };
+
+        return summary;
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        ingredients: state.ingredients
+        ingredients: state.burgerBuilder.ingredients
     }
 }
 
