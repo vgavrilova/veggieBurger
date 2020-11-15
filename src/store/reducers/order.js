@@ -2,7 +2,8 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     orders: [],
-    purchasing: false
+    purchasing: false,
+    purchased: false
 
 };
 
@@ -16,7 +17,8 @@ const reducer = (state = initialState, action) => {
         return {
             ...state,
             purchasing: false,
-            orders: state.orders.concat(newOrder)
+            orders: state.orders.concat(newOrder),
+            purchased: true
 
         };
         case actionTypes.purchaseBurgerFail:
@@ -29,6 +31,12 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 purchasing: true
+    
+            };
+        case actionTypes.purchaseInit:
+            return {
+                ...state,
+                purchased: false
     
             };
         default: 

@@ -22,6 +22,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 ingredients: action.ingredients,
+                total: 5,
                 error: false
             };
         case actionTypes.addIngredient:

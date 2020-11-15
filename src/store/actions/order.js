@@ -35,3 +35,9 @@ export const burgerPurchaseAction = (orderData) => {
     };
 };
 
+export const purchaseInitAction = () => {
+    return {
+        type: actionTypes.purchaseInit
+    };
+};
+
