@@ -5,5 +5,9 @@ export const fetchIngredientsFailed = 'FETCH_INGREDIENTS_FAILED';
 
 export const purchaseBurgerSuccess = 'PURRCHASE_BURGER_SUCCESS';
 export const purchaseBurgerFail = 'PURCHASE_BURGER_FAIL';
-export const isLoading = 'IS_LOADING';
+export const burgerLoading = 'BURGER_LOADING';
 export const purchaseInit = 'PURCHASE_INIT';
+
+export const fetchOrdersLoading = 'FETCH_ORDERS-LOADING';
+export const fetchOrdersSuccess = 'FETCH_ORDERS_SUCCESS';
+export const fetchOrdersFail = 'FETCH_ORDERS_FAIL';
