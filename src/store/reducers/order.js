@@ -1,4 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
+import {updatedObject} from './utility';
 
 const initialState = {
     orders: [],
@@ -8,57 +9,55 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
+    let newState = state;
+
     switch (action.type){
         case actionTypes.purchaseBurgerSuccess:
-            const newOrder = {
-                ...action.orderData,
-                id: action.orderId
-            };
-        return {
-            ...state,
-            loading: false,
-            orders: state.orders.concat(newOrder),
-            purchased: true
-
-        };
+            const newOrder = updatedObject(action.orderData, {id: action.orderId});
+            newState = updatedObject(state, {
+                loading: false,
+                orders: state.orders.concat(newOrder),
+                purchased: true
+            });
+            break;
+       
         case actionTypes.purchaseBurgerFail:
-            return {
-                ...state,
-                loading: false
-
-            };
+            newState = updatedObject(state, {loading: false});
+            break;
+           
         case actionTypes.burgerLoading:
-            return {
-                ...state,
-                loading: true
-    
-            };
+            newState = updatedObject(state, {loading: true});
+            break;
+       
         case actionTypes.purchaseInit:
-            return {
-                ...state,
-                purchased: false
-    
-            };
+            newState = updatedObject(state, {purchased: false});
+            break;
+
         case actionTypes.fetchOrdersLoading:
-            return {
-                ...state,
-                loading: true
-    
-            };
+            newState = updatedObject(state, {loading: true});
+            break;
+            
         case actionTypes.fetchOrdersSuccess:
-            return {
-                ...state,
+            newState = updatedObject(state, {
                 orders: action.orders,
                 loading: false
-            };
+             });
+            break;
+ 
         case actionTypes.fetchOrdersFail:
-            return {
-                ...state,
-                loading: false
-            };
+            newState = updatedObject(state, {loading: false});
+            break;
+
+            // DELETE CASE?
+            // delete an order from the redux global state
+            // and then post the orders via axios
         default: 
-            return state;
+            newState = state;
+            break;
         }
+
+        return newState;
+
 
 };
 
