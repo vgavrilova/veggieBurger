@@ -17,13 +17,15 @@ const input = (props) => {
     switch (props.inputType){
         case 'input':
             inputType = <input 
-                            className={inputClasses.join(' ')} {...props.inputConfig} 
+                            className={inputClasses.join(' ')} 
+                            {...props.inputConfig} 
                             value={props.value} 
                             onChange={props.changed}/>;
             break;
         case 'textarea':
             inputType = <textarea 
-                            className={inputClasses.join(' ')} {...props.inputConfig} 
+                            className={inputClasses.join(' ')} 
+                            {...props.inputConfig} 
                             value={props.value} 
                             onChange={props.changed}/>;
             break;

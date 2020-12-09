@@ -134,7 +134,9 @@ class ContactData extends Component {
             isValid = (value.length >= rules.minLength) && isValid;
         }
         if(rules.mail){
-            isValid = value.includes('@') && isValid;
+            //isValid = value.includes('@') && isValid;
+            const pattern = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
+            isValid = pattern.test(value) && isValid;
         }
 
         return isValid;
@@ -145,6 +147,7 @@ class ContactData extends Component {
 
         const contactData = {};
         
+        // fill a new object with the values from the form
         for(let formId in this.state.orderForm){
             contactData[formId] = this.state.orderForm[formId].value;
         }
@@ -211,7 +214,7 @@ class ContactData extends Component {
                     shouldValidate={field.config.validation}
                     valueType={field.id}
                      />
-        })
+        });
 
         let form = (
             <form onSubmit={this.orderHandler}>

@@ -22,7 +22,7 @@ const burger = (props) => {
         // takes a callback as the first argument with a previous and the next value
         // the second argument is the initial value of the reduced value --> here [] 
         // returns the values of inner arrays --> concatenation of previous and the current array
-        // i.e cheese: 1, salad: 2 => [ch , s , s s ] => length = 3
+        // i.e cheese: 1, salad: 2 => [ch , s ,  s ] => length = 3
         .reduce((arr, el) => {
             return arr.concat(el);
         }, []);
