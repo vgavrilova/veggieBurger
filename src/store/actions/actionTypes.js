@@ -8,6 +8,10 @@ export const purchaseBurgerFail = 'PURCHASE_BURGER_FAIL';
 export const burgerLoading = 'BURGER_LOADING';
 export const purchaseInit = 'PURCHASE_INIT';
 
-export const fetchOrdersLoading = 'FETCH_ORDERS-LOADING';
+export const fetchOrdersLoading = 'FETCH_ORDERS_LOADING';
 export const fetchOrdersSuccess = 'FETCH_ORDERS_SUCCESS';
 export const fetchOrdersFail = 'FETCH_ORDERS_FAIL';
+
+export const authStart = 'AUTH_START';
+export const authSuccess = 'AUTH_SUCCESS';
+export const authFail = 'AUTH_FAIL';
