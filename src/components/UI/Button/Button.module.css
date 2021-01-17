@@ -7,7 +7,7 @@
     cursor: pointer;
     font: inherit;
     padding: 10px;
-    margin: 15px;
+    margin: 0;
     font-weight: bold;
     transform: translate(10%);
 }

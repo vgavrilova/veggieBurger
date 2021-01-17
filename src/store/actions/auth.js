@@ -42,7 +42,7 @@ export const auth = (email, password, signup) => {
             })
             .catch(err => {
                 console.log(err);
-                dispatch(authFailAction(err));
+                dispatch(authFailAction(err.response.data.error));
             });
     };
 };
