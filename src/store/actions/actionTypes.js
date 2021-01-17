@@ -15,3 +15,4 @@ export const fetchOrdersFail = 'FETCH_ORDERS_FAIL';
 export const authStart = 'AUTH_START';
 export const authSuccess = 'AUTH_SUCCESS';
 export const authFail = 'AUTH_FAIL';
+export const authLogOut = 'LOGOUT';
