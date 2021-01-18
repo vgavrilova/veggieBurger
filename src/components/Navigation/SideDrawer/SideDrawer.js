@@ -21,7 +21,7 @@ const sideDrawer = (props) => {
                 <CloseBtn clicked={props.closed}/>
                 <Logo height="12%"/>
                 <nav>
-                    <NavItems />
+                    <NavItems isLoggedIn={props.isLoggedIn}/>
                 </nav>
             </div>
         </Aux>

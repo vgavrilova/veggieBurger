@@ -11,7 +11,7 @@ const toolbar = (props) => (
         <OpenBar />
         <Logo height="82%" />
         <nav className={style.DesktopOnly}>
-            <NavItems />
+            <NavItems isLoggedIn={props.isLoggedIn}/>
         </nav>
     </header>
 );

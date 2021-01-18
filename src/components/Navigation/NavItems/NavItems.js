@@ -5,10 +5,16 @@ import NavItem from './NavItem/NavItem';
 
 
 const NavItems = (props) => (
+
     <ul className={style.NavItems}>
         <NavItem link="/" exact>Burger Builder</NavItem>
         <NavItem link="/orders">Orders</NavItem>
-        <NavItem link="/auth">Sign Up</NavItem>
+        {
+            !props.isLoggedIn ? <NavItem link="/auth">Login</NavItem>
+            : <NavItem link="/logout">Logout</NavItem>
+        }
+        
+        
         
     </ul>
 );

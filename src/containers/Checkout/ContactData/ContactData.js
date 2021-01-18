@@ -158,7 +158,7 @@ class ContactData extends Component {
             total: this.props.total
         }
 
-        this.props.onOrderHandler(order);
+        this.props.onOrderHandler(order, this.props.token);
 
     }
 
@@ -244,13 +244,14 @@ const mapStateToProps = (state) => {
     return {
         ingredients: state.burgerBuilder.ingredients,
         total: state.burgerBuilder.total,
-        isLoading: state.order.loading
+        isLoading: state.order.loading,
+        token: state.auth.token
     };
 };
 
 const mapDispatchToProps = (dispatched) => {
     return {
-        onOrderHandler: (orderData) => dispatched(actionTypes.burgerPurchaseAction(orderData))
+        onOrderHandler: (orderData, token) => dispatched(actionTypes.burgerPurchaseAction(orderData, token))
     };
 };
 

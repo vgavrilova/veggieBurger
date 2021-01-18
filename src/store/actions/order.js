@@ -21,10 +21,10 @@ export const burgerLoadingAction = () => {
         type: actionTypes.burgerLoading
     };
 };
-export const burgerPurchaseAction = (orderData) => {
+export const burgerPurchaseAction = (orderData, token) => {
     return dispatch => {
         dispatch(burgerLoadingAction());
-        axios.post('/orders.json', orderData)
+        axios.post('/orders.json?auth=' + token, orderData)
         .then(response => {
             dispatch(burgerPurchaseSuccessAction(response.data.name, orderData))
         })
@@ -64,11 +64,12 @@ export const fetchOrdersFailAction = (error) => {
     };
 };
 
-export const fetchOrdersAction = () => {
+export const fetchOrdersAction = (token) => {
     return dispatch => {
         dispatch(fetchOrdersLoadingAction());
-
-        axios.get('/orders.json')
+        // in order to authenticate, a token should be passed
+        // the token renews every hour
+        axios.get('/orders.json?auth=' + token)
             .then(res => {
                 // make an array of objects from the fetched data
                 const fetchedOrders = [];

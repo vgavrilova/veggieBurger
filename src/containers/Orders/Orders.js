@@ -4,13 +4,21 @@ import {connect} from 'react-redux';
 import Order from '../../components/Order/Order/Order';
 import * as actions from '../../store/actions';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import Modal from '../../components/UI/Modal/Modal';
 
 
 class Orders extends Component {
+    state = {
+        openedModal: true
+    }
 
     componentDidMount(){
-        this.props.fetchOrdersHandler();
+        this.props.fetchOrdersHandler(this.props.authenticated);
 
+    }
+
+    closeModalHandler = () => {
+        this.setState({openedModal: false});
     }
     render (){
         const orders = this.props.isLoading ? <Spinner /> :
@@ -22,7 +30,10 @@ class Orders extends Component {
         });
         return(
             <div>
-                {orders}
+                {this.props.authenticated != null ? orders : 
+                <Modal show={this.state.openedModal} clickedBackdrop={this.closeModalHandler}>
+                    <p style={{color: 'red', textAlign: 'center', padding: '5px'}}>You have to authenticate!</p>
+                </Modal>}
 
             </div>
         );
@@ -32,13 +43,14 @@ class Orders extends Component {
 const mapStateToProps = (state) => {
     return {
         orders: state.order.orders,
-        isLoading: state.order.loading
+        isLoading: state.order.loading,
+        authenticated: state.auth.token
     };
 };
 
 const mapDispatchToProps = (dispatched) => {
     return {
-        fetchOrdersHandler: () => dispatched(actions.fetchOrdersAction())
+        fetchOrdersHandler: (token) => dispatched(actions.fetchOrdersAction(token))
     };
 };
 
