@@ -46,6 +46,7 @@ class BurgerBuilder extends Component {
         if(this.props.isLoggedIn){
             this.setState({orderMode: true});
         } else {
+            // go to '/checkout' path after being authenticated
             this.props.onPathRedirectHandler('/checkout');
             this.props.history.push('/auth');
         }

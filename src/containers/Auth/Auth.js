@@ -48,9 +48,10 @@ class Auth extends Component {
     }
 
     // redirect users from the authentication page
-    // if his/her burger was already built 
+    // to the '/' path
+    // if his/her burger was not built 
     componentDidMount(){
-        if(this.props.buildingBurger && this.props.redirectPath !== '/'){
+        if(!this.props.buildingBurger && this.props.redirectPath !== '/'){
             this.props.onPathRedirectHandler();
         }
     }
