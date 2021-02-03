@@ -10,5 +10,6 @@ export {
 } from './order';
 export {
     authAction,
-    logoutAction
+    logoutAction,
+    setAuthPath
 } from './auth';

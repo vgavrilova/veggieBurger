@@ -62,3 +62,11 @@ export const authAction = (email, password, signup) => {
             });
     };
 };
+
+export const setAuthPath = (path) => {
+    return {
+        type: actionTypes.setAuthPath,
+        path: path
+    }
+
+}

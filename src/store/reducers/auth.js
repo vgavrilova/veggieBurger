@@ -5,7 +5,8 @@ const initialState = {
     token: null,
     userId: null,
     error: null,
-    loading: false
+    loading: false,
+    authPath: '/'
 }
 
 const reducer = (state = initialState, action) => {
@@ -29,6 +30,10 @@ const reducer = (state = initialState, action) => {
             return updatedObject(state, {
                 token: null,
                 userId: null
+            });
+        case actionTypes.setAuthPath:
+            return updatedObject(state, {
+                authPath: action.path
             });
         default:
             return state;

@@ -22,11 +22,12 @@ const buildControls = (props) => (
                 removeIngredient={() => props.removeIngredient(control.type)}
                 disabled={props.disabled[control.type]}/>
                 )}
+        
         <button 
             className={style.checkoutBtn} 
             disabled={!props.purchaseable}
             onClick={props.btnClicked}
-            >Checkout</button>        
+            >{props.isLoggedin ? 'Checkout' : 'Please Login To Continue!'}</button>        
     </div>
 );
 

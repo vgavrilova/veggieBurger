@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
+
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import * as actions from '../../store/actions';
-import {connect} from 'react-redux';
+
 
 import style from './Auth.module.css';
 
@@ -44,6 +47,14 @@ class Auth extends Component {
         formIsValid: false
     }
 
+    // redirect users from the authentication page
+    // if his/her burger was already built 
+    componentDidMount(){
+        if(this.props.buildingBurger && this.props.redirectPath !== '/'){
+            this.props.onPathRedirectHandler();
+        }
+    }
+
     checkValidity = (value, rules) => {
         let isValid = true;
 
@@ -62,6 +73,8 @@ class Auth extends Component {
 
         return isValid;
     }
+
+   
     onChangeHandler = (e, identifier) => {
         
         // we need to change objects, otherwise we're creating only pointers to them
@@ -103,6 +116,8 @@ class Auth extends Component {
         })
     }
 
+    
+
     render(){
         const formArr = [];
         for (let key in this.state.ctrls){
@@ -136,19 +151,26 @@ class Auth extends Component {
             style={{color: 'red', backgroundColor: '#fce4e4', border: '1px solid #fcc2c3', padding: '5px'}}>
                 {this.props.error.message}</p>;
         };
+
+        // redirect depending on the burger was being changed/built or not
+        let redirectLogged = null;
+        if (this.props.isLoggedIn){
+            redirectLogged = <Redirect to={this.props.redirectPath} />
+        }
     
         return(
             <div className={style.Auth}>
-
+                {redirectLogged}
                 <form onSubmit={(e) => this.onSubmitHandler(e)}>
                     {errorMessage}
                     {inputFields}
-                    <Button btnType="Success">{this.state.isSignUp ? 'Sign Up' : 'Log In'}</Button>
+                    <Button btnType='Success'>{this.state.isSignUp ? 'Sign Up' : 'Log In'}</Button>
 
                 </form>
                 <Button 
                 clicked={this.switchAuthModeHandler}
-                btnType="Danger">Switch to {this.state.isSignUp ? 'Log In' : 'Sign Up'}</Button>
+                btnType='Danger'>Switch to {this.state.isSignUp ? 'Log In' : 'Sign Up'}</Button>
+
 
             </div>
         );
@@ -158,13 +180,18 @@ class Auth extends Component {
 const mapStateToProps = (state) => {
     return {
         loading: state.auth.loading,
-        error: state.auth.error
+        error: state.auth.error,
+        isLoggedIn: state.auth.token !== null,
+        authPath: state.auth.authPath,
+        buildingBurger: state.auth.bulding,
+        redirectPath: state.auth.authPath
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAuth: (email, password, isSignUp) => dispatch(actions.authAction(email, password, isSignUp))
+        onAuth: (email, password, isSignUp) => dispatch(actions.authAction(email, password, isSignUp)),
+        onPathRedirectHandler: () => dispatch(actions.setAuthPath('/'))
     };
     
 };
