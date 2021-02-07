@@ -11,7 +11,9 @@ const input = (props) => {
 
     if(props.invalid && props.shouldValidate && props.touched){
         inputClasses.push(style.Invalid);
-        errorMessage = <p className={style.ValidationError}>Please enter a valid {props.valueType}!</p>
+        errorMessage = <p className={style.ValidationError}>Please enter a valid {props.valueType}! 
+        {props.valueType === 'password' ? ' It should be at least 6 characters long' : null}</p>
+                       
     }
 
     switch (props.inputType){

@@ -127,7 +127,7 @@ class Auth extends Component {
                 id: key
             })
         }
-
+        
         let inputFields = formArr.map(field => {
             return <Input 
                     inputType={field.config.inputType} 
@@ -142,15 +142,15 @@ class Auth extends Component {
                      />
                      
         });
-        if (this.props.loading && this.props.error == null){
-            inputFields = <Spinner />;
-        };
 
         let errorMessage = null;
         if (this.props.error){
             errorMessage = <p 
             style={{color: 'red', backgroundColor: '#fce4e4', border: '1px solid #fcc2c3', padding: '5px'}}>
                 {this.props.error.message}</p>;
+        };
+        if (this.props.loading && this.props.error == null){
+            inputFields = <Spinner />;
         };
 
         // redirect depending on the burger was being changed/built or not
