@@ -35,8 +35,6 @@ class BurgerBuilder extends Component {
             .reduce((prevEl, currentEl) => {
                 return prevEl + currentEl}, 0);
 
-            //console.log(sum); 
-
            return sum > 0;
             
     }

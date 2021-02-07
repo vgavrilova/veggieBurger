@@ -23,10 +23,16 @@ class Orders extends Component {
     render (){
         const orders = this.props.isLoading ? <Spinner /> :
             this.props.orders.map(order => {
-                return <Order 
+                // TODO: Backend security for the fetched orders
+                // (fetch only user specific orders)
+                if(order.userId === this.props.userId){
+                    return <Order 
                     key={order.id} 
                     ingredients={order.ingredients} 
-                    total={+order.total}/>
+                    total={+order.total}/> 
+                }
+                return null;
+                
         });
         return(
             <div>
@@ -44,7 +50,8 @@ const mapStateToProps = (state) => {
     return {
         orders: state.order.orders,
         isLoading: state.order.loading,
-        authenticated: state.auth.token
+        authenticated: state.auth.token,
+        userId: state.auth.userId
     };
 };
 
