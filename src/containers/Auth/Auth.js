@@ -167,9 +167,7 @@ class Auth extends Component {
     let authRedirect = null;
 
     if (this.props.isLoggedIn && this.props.buildingBurger) {
-      authRedirect = <Redirect to="/checkout" />;
-    } else if (this.props.isLoggedIn) {
-      authRedirect = <Redirect to="/" />;
+      authRedirect = <Redirect to={this.props.redirectPath} />;
     }
     return (
       <div className={style.Auth}>
