@@ -1,9 +1,8 @@
-import React from 'react';
+import React from "react";
 
 // a globally available js object
 const showSideBar = React.createContext({
-    show: () => {}
+  show: () => {},
 });
-
 
 export default showSideBar;
