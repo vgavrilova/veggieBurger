@@ -11,7 +11,7 @@ const burger = (props) => {
   let ingredients = Object.keys(props.ingredients)
     .map((igKey) => {
       // map through every item of the same type
-      // i.e. cheese: 2 --> [...Array(props.ingredients[2])]  --> it will be iterated
+      // i.e. cheese: 2 --> [...Array(props.ingredients[cheese])]  --> it will be iterated
       // returns the exact type of an ingredient and the number it occurs in the object
       return [...Array(props.ingredients[igKey])].map((_, index) => {
         return <BurgerIngredient key={igKey + index} type={igKey} />;
